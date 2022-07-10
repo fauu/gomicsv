@@ -14,7 +14,7 @@ the GNU GPL v3 or later.
 **This is a personal fork of *Gomics* (without the *-v*). Please also consult the
 main project’s README at <https://github.com/salviati/gomics>**.
 
-This fork has been made solely with personal use for reading manga with
+This fork has been made with personal use for reading manga with
 mouse-centered navigation in mind. Consequently, some aspects of other workflows
 might have been broken.
 
