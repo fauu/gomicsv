@@ -1,0 +1,1201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2013-2021 Utkan Güngördü <utkan@freeconsole.org>
+ Copyright (c) 2021-2022 Piotr Grabowski
+ 
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<interface>
+  <requires lib="gtk" version="3.12"/>
+  <object class="GtkAccelGroup" id="AcceleratorGroup"/>
+  <object class="GtkFileFilter" id="FileFilterArchive">
+    <mime-types>
+      <mime-type>application/zip</mime-type>
+      <mime-type>application/x-cbz</mime-type>
+    </mime-types>
+  </object>
+  <object class="GtkRecentFilter" id="RecentFilter">
+    <applications>
+      <application>com.github.fauu.gomicsv</application>
+    </applications>
+  </object>
+  <object class="GtkApplicationWindow" id="MainWindow">
+    <property name="can-focus">false</property>
+    <property name="title" translatable="yes">Gomics-v</property>
+    <property name="window-position">center</property>
+    <child>
+      <object class="GtkOverlay" id="MainOverlay">
+        <property name="visible">true</property>
+        <property name="can_focus">false</property>
+        <child>
+          <object class="GtkBox" id="MainContainer">
+            <property name="visible">true</property>
+            <property name="can-focus">true</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkMenuBar" id="Menubar">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <child>
+                  <object class="GtkMenuItem" id="MenuItemFile">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="label" translatable="yes">_File</property>
+                    <property name="use-underline">true</property>
+                    <child type="submenu">
+                      <object class="GtkMenu" id="MenuFile">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemOpen">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Open</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemOpenURL">
+                            <property name="label" translatable="yes">Open URL (experimental)</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="RecentFiles">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Recent Files</property>
+                            <property name="use-underline">true</property>
+                            <child type="submenu">
+                              <object class="GtkRecentChooserMenu" id="RecentChooserMenu">
+                                <property name="visible">true</property>
+                                <property name="can-focus">false</property>
+                                <property name="filter">RecentFilter</property>
+                                <property name="limit">10</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemSaveImage">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Save image as…</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemClose">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Close</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="separatormenuitem1">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemQuit">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Quit</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuItem" id="MenuItemEdit">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="label" translatable="yes">_Edit</property>
+                    <property name="use-underline">true</property>
+                    <child type="submenu">
+                      <object class="GtkMenu" id="MenuEdit">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemCopyImageToClipboard">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Copy image to clipboard</property>
+                            <property name="use-underline">true</property>
+                            <property name="sensitive">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitemeditseparator1">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemPreferences">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Preferences</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuItem" id="MenuItemView">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="label" translatable="yes">_View</property>
+                    <property name="use-underline">true</property>
+                    <child type="submenu">
+                      <object class="GtkMenu" id="MenuView">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemShrink">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Shrink large images</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemEnlarge">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Enlarge small images</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitem1">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkRadioMenuItem" id="MenuItemBestFit">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Best fit</property>
+                            <property name="use-underline">true</property>
+                            <property name="draw-as-radio">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkRadioMenuItem" id="MenuItemOriginal">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Original size</property>
+                            <property name="use-underline">true</property>
+                            <property name="draw-as-radio">true</property>
+                            <property name="group">MenuItemBestFit</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkRadioMenuItem" id="MenuItemFitToWidth">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Fit to width</property>
+                            <property name="use-underline">true</property>
+                            <property name="draw-as-radio">true</property>
+                            <property name="group">MenuItemBestFit</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkRadioMenuItem" id="MenuItemFitToHeight">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Fit to height</property>
+                            <property name="use-underline">true</property>
+                            <property name="draw-as-radio">true</property>
+                            <property name="group">MenuItemBestFit</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitem2">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemFullscreen">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Fullscreen</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemHideUI">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Hide UI</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemSeamless">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Seamless mode</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemRandom">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Random ordering</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitem3">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemVFlip">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Flip vertically</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemHFlip">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Flip horizontally</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitem4">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemMangaMode">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Manga mode</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemDoublePage">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Double page</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuItem" id="MenuItemNavigation">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="label" translatable="yes">_Navigation</property>
+                    <property name="use-underline">true</property>
+                    <child type="submenu">
+                      <object class="GtkMenu" id="MenuNavigation">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemPreviousPage">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Previous page</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemNextPage">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Next page</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitem7">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemSkipBackward">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Skip backward</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemSkipForward">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Skip forward</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitem8">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemFirstPage">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">First page</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemLastPage">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Last page</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitem9">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemPreviousArchive">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Previous archive</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemNextArchive">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Next archive</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitem5">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemGoTo">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Go to page</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuItem" id="MenuItemBookmarks">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="label" translatable="yes">_Bookmarks</property>
+                    <property name="use-underline">true</property>
+                    <child type="submenu">
+                      <object class="GtkMenu" id="MenuBookmarks">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <child>
+                          <object class="GtkMenuItem" id="AddBookmarkMenuItem">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Add bookmark</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="BookmarksSeparatorMenuItem">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuItem" id="MenuItemJumpmarks">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="label" translatable="yes">_Jumpmarks</property>
+                    <property name="use-underline">true</property>
+                    <child type="submenu">
+                      <object class="GtkMenu" id="MenuJumpmarks">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <child>
+                          <object class="GtkMenuItem" id="ToggleJumpmarkMenuItem">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Mark current page</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="CycleJumpmarksBackwardMenuItem">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Cycle backward</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="CycleJumpmarksForwardMenuItem">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Cycle forward</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkMenuItem" id="JumpmarksReturnFromCyclingMenuItem">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Return to the initial page</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="JumpmarksSeparatorMenuItem">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuItem" id="MenuItemHelp">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="label" translatable="yes">_Help</property>
+                    <property name="use-underline">true</property>
+                    <child type="submenu">
+                      <object class="GtkMenu" id="MenuAbout">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <child>
+                          <object class="GtkMenuItem" id="MenuItemAbout">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">About</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToolbar" id="Toolbar">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <child>
+                  <object class="GtkToolButton" id="ButtonFirstPage">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="tooltip-text" translatable="yes">First page</property>
+                    <property name="label" translatable="yes">First page</property>
+                    <property name="use-underline">true</property>
+                    <property name="icon-name">go-first</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="ButtonSkipBackward">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="tooltip-text" translatable="yes">Skip backwards</property>
+                    <property name="label" translatable="yes">Skip backwards</property>
+                    <property name="use-underline">true</property>
+                    <property name="icon-name">edit-undo</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="ButtonPreviousPage">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="tooltip-text" translatable="yes">Previous page</property>
+                    <property name="label" translatable="yes">Previous Page</property>
+                    <property name="use-underline">true</property>
+                    <property name="icon-name">go-previous</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="ButtonNextPage">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="tooltip-text" translatable="yes">Next page</property>
+                    <property name="label" translatable="yes">Next page</property>
+                    <property name="use-underline">true</property>
+                    <property name="icon-name">go-next</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="ButtonSkipForward">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="tooltip-text" translatable="yes">Skip forward</property>
+                    <property name="label" translatable="yes">Skip forward</property>
+                    <property name="use-underline">true</property>
+                    <property name="icon-name">edit-redo</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="ButtonLastPage">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="tooltip-text" translatable="yes">Last page</property>
+                    <property name="label" translatable="yes">Last page</property>
+                    <property name="use-underline">true</property>
+                    <property name="icon-name">go-last</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSeparatorToolItem" id="separator1">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="ButtonPreviousArchive">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="tooltip-text" translatable="yes">Previous archive</property>
+                    <property name="label" translatable="yes">Previous archive</property>
+                    <property name="use-underline">true</property>
+                    <property name="icon-name">media-seek-backward</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="ButtonNextArchive">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="tooltip-text" translatable="yes">Next archive</property>
+                    <property name="label" translatable="yes">Next archive</property>
+                    <property name="use-underline">true</property>
+                    <property name="icon-name">media-seek-forward</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="ScrolledWindow">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="shadow-type">in</property>
+                <property name="vexpand">true</property>
+                <property name="name">ScrolledWindow</property>
+                <child>
+                  <object class="GtkViewport" id="ImageViewport">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <child>
+                      <object class="GtkBox" id="ImageBox">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkImage" id="ImageL">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="ImageR">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStatusbar" id="Statusbar">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">2</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child type="overlay">
+          <object class="GtkRevealer" id="NotificationRevealer">
+            <property name="visible">true</property>
+            <property name="can_focus">false</property>
+            <property name="halign">center</property>
+            <property name="valign">start</property>
+            <child>
+              <object class="GtkBox" id="NotificationBox">
+                <property name="visible">true</property>
+                <property name="can_focus">false</property>
+                <property name="valign">start</property>
+                <property name="spacing">20</property>
+                <child>
+                  <object class="GtkLabel" id="NotificationLabel">
+                    <property name="visible">true</property>
+                    <property name="can_focus">false</property>
+                    <property name="label" translatable="yes"></property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="NotificationCloseButton">
+                    <property name="visible">true</property>
+                    <property name="can_focus">true</property>
+                    <property name="receives_default">true</property>
+                    <property name="relief">none</property>
+                    <child>
+                      <object class="GtkImage" id="NotificationCloseButtonImage">
+                        <property name="visible">true</property>
+                        <property name="can_focus">false</property>
+                        <property name="icon_name">window-close-symbolic</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="image-button"/>
+                    </style>
+                  </object>
+                </child>
+                <style>
+                  <class name="app-notification"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkAboutDialog" id="AboutDialog">
+    <property name="can-focus">false</property>
+    <property name="border-width">5</property>
+    <property name="title" translatable="yes">About Gomics-v</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">MainWindow</property>
+    <property name="program-name">Gomics-v</property>
+    <property name="copyright" translatable="yes">Copyright (c) 2013–2021 Utkan Güngördü
+Copyright (c) 2021–2022 Piotr Grabowski</property>
+    <property name="comments" translatable="yes">Gomics-v is a GTK comic and image archive viewer written in Go, available under the GNU GPL v3 or later.</property>
+    <property name="website">https://github.com/fauu/gomicsv</property>
+    <property name="authors">Utkan Güngördü, Piotr Grabowski</property>
+    <property name="artists">Hiroshi Seo (Ubunchu! artwork, licensed under Creative Commons: Attribution-NonCommercial-ShareAlike 2.1)</property>
+    <property name="logo-icon-name"/>
+    <property name="wrap-license">true</property>
+    <property name="license-type">gpl-3-0</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="AboutDialogVBox">
+        <property name="can-focus">false</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="aboutdialog-action_area1">
+            <property name="can-focus">false</property>
+            <property name="layout-style">end</property>
+          </object>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkFileChooserDialog" id="ArchiveFileChooserDialog">
+    <property name="can-focus">false</property>
+    <property name="border-width">5</property>
+    <property name="title" translatable="yes">Open archive</property>
+    <property name="role">GtkFileChooserDialog</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="icon-name">document-open</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">MainWindow</property>
+    <property name="filter">FileFilterArchive</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="ArchiveFileChooserDialogVBox">
+        <property name="can-focus">false</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">false</property>
+          </object>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkFileChooserDialog" id="SaveImageFileChooserDialog">
+    <property name="can-focus">false</property>
+    <property name="border-width">5</property>
+    <property name="title" translatable="yes">Save image</property>
+    <property name="role">GtkFileChooserDialog</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="icon-name">document-save-as</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">MainWindow</property>
+    <property name="action">GTK_FILE_CHOOSER_ACTION_SAVE</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="SaveImageFileChooserDialogVBox">
+        <property name="can-focus">false</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">false</property>
+          </object>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="GoToDialog">
+    <property name="can-focus">false</property>
+    <property name="title" translatable="yes">Go to page</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="icon-name">go-jump</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">MainWindow</property>
+    <property name="resizable">false</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="GoToMainContainer">
+        <property name="can-focus">false</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="GoToActionArea">
+            <property name="can-focus">false</property>
+            <property name="layout-style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="GoToTopContainer">
+            <property name="visible">true</property>
+            <property name="can-focus">false</property>
+            <child>
+              <object class="GtkSpinButton" id="GoToSpinButton">
+                <property name="visible">true</property>
+                <property name="can-focus">true</property>
+                <property name="caps-lock-warning">false</property>
+                <property name="input-purpose">number</property>
+                <property name="numeric">true</property>
+                <property name="activates-default">true</property>
+                <property name="expand">true</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrollbar" id="GoToScrollbar">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="restrict-to-fill-level">false</property>
+                <property name="fill-level">0</property>
+                <property name="round-digits">0</property>
+                <property name="width-request">300</property>
+                <property name="hexpand">true</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage" id="GoToThumbnailImage">
+            <property name="width-request">128</property>
+            <property name="height-request">128</property>
+            <property name="visible">true</property>
+            <property name="can-focus">false</property>
+            <property name="icon-name">image-missing</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="OpenURLDialog">
+    <property name="width-request">400</property>
+    <property name="can-focus">false</property>
+    <property name="title" translatable="yes">Open URL (experimental)</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="icon-name">document-open</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">MainWindow</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="OpenURLDialogBoxMain">
+        <property name="can-focus">false</property>
+        <property name="orientation">vertical</property>
+        <property name="margin">10</property>
+        <child>
+          <object class="GtkLabel" id="OpenURLDialogURLPromptLabel">
+            <property name="visible">true</property>
+            <property name="label" translatable="yes">URL or URL template:</property>
+            <property name="halign">GTK_ALIGN_START</property>
+            <property name="margin-bottom">5</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="OpenURLDialogURLEntry">
+            <property name="visible">true</property>
+            <property name="margin-bottom">20</property>
+            <property name="activates-default">true</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="OpenURLDialogExplanationLabel">
+            <property name="visible">true</property>
+            <property name="wrap">true</property>
+            <property name="max-width-chars">80</property>
+            <property name="use-markup">true</property>
+            <property name="label" translatable="yes"></property>
+            <property name="halign">GTK_ALIGN_START</property>
+            <property name="margin-bottom">20</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="OpenURLDialogRefererPromptLabel">
+            <property name="visible">true</property>
+            <property name="label" translatable="yes">HTTP Referer:</property>
+            <property name="halign">GTK_ALIGN_START</property>
+            <property name="margin-bottom">5</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="OpenURLDialogRefererEntry">
+            <property name="visible">true</property>
+            <property name="margin-bottom">5</property>
+            <property name="activates-default">true</property>
+          </object>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="OpenURLDialogActionAreaButtonBox">
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="PreferencesDialog">
+    <property name="can-focus">false</property>
+    <property name="border-width">5</property>
+    <property name="title" translatable="yes">Preferences</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">MainWindow</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox1">
+        <property name="can-focus">false</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area1">
+            <property name="can-focus">false</property>
+            <property name="layout-style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkNotebook" id="PreferencesNotebook">
+            <property name="visible">true</property>
+            <property name="can-focus">true</property>
+            <property name="margin-bottom">5</property>
+            <child>
+              <object class="GtkBox" id="PreferencesAppearance">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">10</property>
+                <child>
+                  <object class="GtkBox" id="box4">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <child>
+                      <object class="GtkLabel" id="label1">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <property name="label" translatable="yes">Background color:</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">GTK_ALIGN_START</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkColorButton" id="BackgroundColorButton">
+                        <property name="visible">true</property>
+                        <property name="can-focus">true</property>
+                        <property name="receives-default">true</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="PreferencesAppearanceLabel">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="label" translatable="yes">Appearance</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="PreferencesBehavior">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">10</property>
+                <child>
+                  <object class="GtkCheckButton" id="RememberRecentCheckButton">
+                    <property name="label" translatable="yes">Remember recently opened files</property>
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="receives-default">false</property>
+                    <property name="draw-indicator">true</property>
+                    <property name="margin-bottom">5</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="RememberPositionCheckButton">
+                    <property name="label" translatable="yes">Remember reading position</property>
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="receives-default">false</property>
+                    <property name="draw-indicator">true</property>
+                    <property name="margin-bottom">5</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="RememberPositionHTTPCheckButton">
+                    <property name="label" translatable="yes">Remember reading position for HTTP archives</property>
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="receives-default">false</property>
+                    <property name="draw-indicator">true</property>
+                    <property name="margin-left">20</property>
+                    <property name="margin-bottom">5</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="PagesToSkip">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="margin-bottom">5</property>
+                    <child>
+                      <object class="GtkLabel" id="PagesToSkipLabel">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <property name="label" translatable="yes">Number of pages to skip: </property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">GTK_ALIGN_START</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="PagesToSkipSpinButton">
+                        <property name="visible">true</property>
+                        <property name="can-focus">true</property>
+                        <property name="caps-lock-warning">false</property>
+                        <property name="input-purpose">digits</property>
+                        <property name="numeric">true</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="Interpolation">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="margin-bottom">5</property>
+                    <child>
+                      <object class="GtkLabel" id="InterpolationLabel">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <property name="label" translatable="yes">Image interpolation algorithm:</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">GTK_ALIGN_START</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkComboBoxText" id="InterpolationComboBoxText">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <property name="active">2</property>
+                        <items>
+                          <item translatable="yes">Nearest</item>
+                          <item translatable="yes">Tiles</item>
+                          <item translatable="yes">Bilinear</item>
+                          <item translatable="yes">Hyper</item>
+                        </items>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="PreferencesBehaviorLabel">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="label" translatable="yes">Behavior</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="PreferencesDisplay">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">10</property>
+                <child>
+                  <object class="GtkCheckButton" id="OneWideCheckButton">
+                    <property name="label" translatable="yes">Display one wide image in double-page mode</property>
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="receives-default">false</property>
+                    <property name="draw-indicator">true</property>
+                    <property name="margin-bottom">5</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="EmbeddedOrientationCheckButton">
+                    <property name="label" translatable="yes">Automatically rotate images according to EXIF data</property>
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="receives-default">false</property>
+                    <property name="draw-indicator">true</property>
+                    <property name="margin-bottom">5</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="SmartScrollCheckButton">
+                    <property name="label" translatable="yes">Use smart scroll</property>
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="receives-default">false</property>
+                    <property name="draw-indicator">true</property>
+                    <property name="margin-bottom">5</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="HideIdleCursorCheckButton">
+                    <property name="label" translatable="yes">Hide the cursor while stationary</property>
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="receives-default">false</property>
+                    <property name="draw-indicator">true</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="PreferencesDisplayLabel">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="label" translatable="yes">Display</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="PreferencesKamite">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="orientation">vertical</property>
+                <property name="margin">10</property>
+                <child>
+                  <object class="GtkCheckButton" id="KamiteEnabledCheckButton">
+                    <property name="label" translatable="yes">Enable integration</property>
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="receives-default">false</property>
+                    <property name="draw-indicator">true</property>
+                    <property name="margin-bottom">5</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="KamitePortContainer">
+                    <property name="visible">true</property>
+                    <property name="can-focus">false</property>
+                    <property name="margin-bottom">5</property>
+                    <child>
+                      <object class="GtkLabel" id="KamitePortLabel">
+                        <property name="visible">true</property>
+                        <property name="can-focus">false</property>
+                        <property name="label" translatable="yes">Port:</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">GTK_ALIGN_START</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="KamitePortEntry">
+                        <property name="visible">true</property>
+                        <property name="can-focus">true</property>
+                        <property name="caps-lock-warning">false</property>
+                        <property name="input-purpose">digits</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="PreferencesKamiteLabel">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="label" translatable="yes">Kamite</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
