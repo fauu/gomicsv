@@ -22,19 +22,14 @@ might have been broken.
   <img src="screenshot.png" title="A screenshot of Gomics-v">
 </p>
 
-## Table of contents
-
-1. [Changes from Gomics](#changes-from-gomics)
-2. [Installation](#installation)
-3. [Building](#installation)
-4. [License](#license)
-
 ## Changes from Gomics
 
 * Add **Jumpmarks**
 
   Temporary page marks for quickly jumping around the currently open archive.
   See the `Jumpmarks` menu in the menu bar for more information.
+
+* Add **Hide UI** option (`Alt+M` to hide/unhide).
 
 * Add *experimental* **HTTP archive support**
 
@@ -53,16 +48,14 @@ might have been broken.
   Right-click on text block for automatic OCR. Right-hold-click to initialize
   manual block recognition selection. *Must be first enabled in Preferences.*
 
-* Add **Remember reading position**
+* Add **Remember reading position** option
 
   Automatically saves the last reading position for each archive and resumes
   reading at that position. *Must be first enabled in Preferences.*
 
-* Add **Save image as…**
+* Add **Save image as…** command
 
-* Add **Copy image to clipboard**
-
-* Add **Hide UI** (`Alt+M` to hide/unhide).
+* Add **Copy image to clipboard** command
 
 * Polish the look of preferences UI.
 
