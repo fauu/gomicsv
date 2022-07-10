@@ -39,12 +39,12 @@ type JumpmarksCycle struct {
 	dontClear  bool
 }
 
+type JumpmarkCycleDirection int
+
 const (
-	cycleDirectionBackward = iota
+	cycleDirectionBackward JumpmarkCycleDirection = iota
 	cycleDirectionForward
 )
-
-type JumpmarkCycleDirection int
 
 func (jumpmarks Jumpmarks) has(page int) bool {
 	for _, mark := range jumpmarks.list {

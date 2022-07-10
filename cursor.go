@@ -33,13 +33,13 @@ type CursorsState struct {
 	ForceVisible bool
 }
 
+type Cursor int
+
 const (
-	cursorNone = iota
+	cursorNone Cursor = iota
 	cursorDefault
 	cursorGrabbing
 )
-
-type Cursor int
 
 type CursorCache = map[Cursor]*gdk.Cursor
 

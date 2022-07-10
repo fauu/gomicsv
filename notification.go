@@ -31,7 +31,7 @@ var (
 type NotificationLength = int
 
 const (
-	ShortNotification = iota
+	ShortNotification NotificationLength = iota
 	LongNotification
 )
 
