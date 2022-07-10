@@ -56,7 +56,7 @@ might have been broken.
 * Add **Remember reading position**
 
   Automatically saves the last reading position for each archive and resumes
-  reading at that position. Can be disabled in Preferences.
+  reading at that position. *Must be first enabled in Preferences.*
 
 * Add **Save image as…**
 
