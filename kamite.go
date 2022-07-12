@@ -19,22 +19,23 @@
 package gomicsv
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"net/url"
-	"strconv"
-	"strings"
 
 	"github.com/gotk3/gotk3/gdk"
 )
 
-var (
-	kamiteCMDEndpointBaseTpl      = "http://localhost:%d/cmd/"
-	kamiteOCRImageEndpoint        = "ocr/image"
-	kamiteOCRManualBlockEndpoint  = "ocr/manual-block"
+const (
 	kamiteRecognizeImageSnipDimensionPx = 500
+	kamiteCMDEndpointBaseTpl            = "http://localhost:%d/cmd/"
+	kamiteOCRImageEndpoint              = "ocr/image"
+	kamiteOCRManualBlockEndpoint        = "ocr/manual-block"
+
+	bytesPerPixel = 3
 )
 
 func (app *App) kamiteRecognizeManualBlock() {
@@ -106,7 +107,7 @@ func (app *App) kamiteRecognizeImageUnderCursorBlock() {
 	// 4. Grab area around the cursor
 	snipDim := kamiteRecognizeImageSnipDimensionPx
 	snipSourceX0, snipSourceY0 := targetX-(snipDim/2), targetY-(snipDim/2)
-	snipBytes := make([]int, snipDim*snipDim)
+	snipBytes := make([]byte, snipDim*snipDim*bytesPerPixel)
 	for y := 0; y < snipDim; y++ {
 		for x := 0; x < snipDim; x++ {
 			srcX, srcY := snipSourceX0+x, snipSourceY0+y
@@ -118,7 +119,10 @@ func (app *App) kamiteRecognizeImageUnderCursorBlock() {
 				idx := srcY*srcRowstride + srcX*srcNChannels
 				r, g, b = srcPixels[idx], srcPixels[idx+1], srcPixels[idx+2]
 			}
-			snipBytes[y*snipDim+x] = int(r)<<16 | int(g)<<8 | int(b)
+			idx := ((y * snipDim) + x) * bytesPerPixel
+			snipBytes[idx] = r
+			snipBytes[idx+1] = g
+			snipBytes[idx+2] = b
 		}
 	}
 
@@ -132,23 +136,16 @@ func (app *App) kamiteRecognizeImageUnderCursorBlock() {
 }
 
 type KamiteOCRImageCommandParams struct {
-	Pixels string `json:"pixels"`
-	Width  int    `json:"width"`
-	Height int    `json:"height"`
+	BytesB64 string `json:"bytesB64"`
+	Width    int    `json:"width"`
+	Height   int    `json:"height"`
 }
 
-func kamiteSendOCRImageCommand(port int, imgBytes []int, w, h int) {
-	stringBytes := []string{}
-	for i := range imgBytes {
-		s := strconv.Itoa(imgBytes[i])
-		stringBytes = append(stringBytes, s)
-	}
-	bytesString := strings.Join(stringBytes, ",")
-
+func kamiteSendOCRImageCommand(port int, imgBytes []byte, w, h int) {
 	paramsJSON, err := json.Marshal(KamiteOCRImageCommandParams{
-		Pixels: bytesString,
-		Width:  w,
-		Height: h,
+		Width:    w,
+		Height:   h,
+		BytesB64: base64.StdEncoding.EncodeToString(imgBytes),
 	})
 	if err != nil {
 		log.Printf("Error encoding Kamite command params: %v", err)
