@@ -182,17 +182,13 @@ func (app *App) setVFlip(vflip bool) {
 
 func (app *App) setFullscreen(fullscreen bool) {
 	app.Config.Fullscreen = fullscreen
+
 	if fullscreen {
-		app.W.Statusbar.Hide()
-		app.W.Toolbar.Hide()
-		//app.Menubar.Hide() // BUG: menubar visible on fullscreen
 		app.W.MainWindow.Fullscreen()
 	} else {
-		app.W.Statusbar.Show()
-		app.W.Toolbar.Show()
-		//app.Menubar.Show()
 		app.W.MainWindow.Unfullscreen()
 	}
+
 	app.W.MenuItemFullscreen.SetActive(fullscreen)
 }
 
