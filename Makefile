@@ -19,5 +19,5 @@ dist: build
 	cp README.md target/dist/gomicsv; \
 	cp COPYING.md target/dist/gomicsv; \
 	pushd target/dist; \
-	zip -r ../Gomicsv_$(VERSION).zip gomicsv; \
+	zip -r ../Gomics-v_$(VERSION).zip gomicsv; \
 	rm -rf gomicsv; \
