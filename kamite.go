@@ -31,10 +31,10 @@ import (
 )
 
 var (
-	kamiteRecognizeImageSnipScale = 0.8
 	kamiteCMDEndpointBaseTpl      = "http://localhost:%d/cmd/"
 	kamiteOCRImageEndpoint        = "ocr/image"
 	kamiteOCRManualBlockEndpoint  = "ocr/manual-block"
+	kamiteRecognizeImageSnipDimensionPx = 500
 )
 
 func (app *App) kamiteRecognizeManualBlock() {
@@ -104,7 +104,7 @@ func (app *App) kamiteRecognizeImageUnderCursorBlock() {
 	srcRowstride := srcPixbuf.GetRowstride()
 
 	// 4. Grab area around the cursor
-	snipDim := app.kamiteSnipDimension()
+	snipDim := kamiteRecognizeImageSnipDimensionPx
 	snipSourceX0, snipSourceY0 := targetX-(snipDim/2), targetY-(snipDim/2)
 	snipBytes := make([]int, snipDim*snipDim)
 	for y := 0; y < snipDim; y++ {
@@ -129,11 +129,6 @@ func (app *App) kamiteRecognizeImageUnderCursorBlock() {
 		snipDim,
 		snipDim,
 	)
-}
-
-func (app *App) kamiteSnipDimension() int {
-	w, _ := app.getImageAreaInnerSize()
-	return int(kamiteRecognizeImageSnipScale * float64(w))
 }
 
 type KamiteOCRImageCommandParams struct {
