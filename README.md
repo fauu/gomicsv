@@ -76,6 +76,10 @@ Or build it from the source:
 
 [Releases]: https://github.com/fauu/gomicsv/releases
 
+## Known issues
+
+* On GNOME, *Hide UI* breaks once the window is made full screen or maximized.
+
 ## Building
 
 ```sh
