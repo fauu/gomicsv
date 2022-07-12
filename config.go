@@ -205,11 +205,6 @@ func (app *App) setHideUI(hideUI bool) {
 		app.W.Statusbar.Show()
 	}
 
-	// Force child size recalculation
-	// FIXME: This sometimes doesn't have an effect
-	app.W.MainContainer.Hide()
-	app.W.MainContainer.Show()
-
 	app.W.MenuItemHideUI.SetActive(hideUI)
 }
 
