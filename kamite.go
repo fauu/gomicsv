@@ -30,10 +30,12 @@ import (
 )
 
 const (
-	kamiteRecognizeImageSnipDimensionPx = 500
-	kamiteCMDEndpointBaseTpl            = "http://localhost:%d/cmd/"
-	kamiteOCRImageEndpoint              = "ocr/image"
-	kamiteOCRManualBlockEndpoint        = "ocr/manual-block"
+	kamiteRecognizeImageSnipWidthPx  = 550
+	kamiteRecognizeImageSnipHeightPx = 900
+
+	kamiteCMDEndpointBaseTpl     = "http://localhost:%d/cmd/"
+	kamiteOCRImageEndpoint       = "ocr/image"
+	kamiteOCRManualBlockEndpoint = "ocr/manual-block"
 
 	bytesPerPixel = 3
 )
@@ -105,11 +107,12 @@ func (app *App) kamiteRecognizeImageUnderCursorBlock() {
 	srcRowstride := srcPixbuf.GetRowstride()
 
 	// 4. Grab area around the cursor
-	snipDim := kamiteRecognizeImageSnipDimensionPx
-	snipSourceX0, snipSourceY0 := targetX-(snipDim/2), targetY-(snipDim/2)
-	snipBytes := make([]byte, snipDim*snipDim*bytesPerPixel)
-	for y := 0; y < snipDim; y++ {
-		for x := 0; x < snipDim; x++ {
+	snipW := kamiteRecognizeImageSnipWidthPx
+	snipH := kamiteRecognizeImageSnipHeightPx
+	snipSourceX0, snipSourceY0 := targetX-(snipW/2), targetY-(snipH/2)
+	snipBytes := make([]byte, snipW*snipH*bytesPerPixel)
+	for y := 0; y < snipH; y++ {
+		for x := 0; x < snipW; x++ {
 			srcX, srcY := snipSourceX0+x, snipSourceY0+y
 			var r, g, b byte
 			if srcX < 0 || srcY < 0 || srcX >= srcW || srcY >= srcH {
@@ -119,7 +122,7 @@ func (app *App) kamiteRecognizeImageUnderCursorBlock() {
 				idx := srcY*srcRowstride + srcX*srcNChannels
 				r, g, b = srcPixels[idx], srcPixels[idx+1], srcPixels[idx+2]
 			}
-			idx := ((y * snipDim) + x) * bytesPerPixel
+			idx := ((y * snipW) + x) * bytesPerPixel
 			snipBytes[idx] = r
 			snipBytes[idx+1] = g
 			snipBytes[idx+2] = b
@@ -130,8 +133,8 @@ func (app *App) kamiteRecognizeImageUnderCursorBlock() {
 	go kamiteSendOCRImageCommand(
 		app.Config.KamitePort,
 		snipBytes,
-		snipDim,
-		snipDim,
+		snipW,
+		snipH,
 	)
 }
 
