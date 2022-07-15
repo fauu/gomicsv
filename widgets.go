@@ -89,6 +89,7 @@ type Widgets struct {
 	MenuItemBestFit                    *gtk.RadioMenuItem     `build:"MenuItemBestFit"`
 	MenuItemOriginal                   *gtk.RadioMenuItem     `build:"MenuItemOriginal"`
 	MenuItemFitToWidth                 *gtk.RadioMenuItem     `build:"MenuItemFitToWidth"`
+	MenuItemFitToHalfWidth             *gtk.RadioMenuItem     `build:"MenuItemFitToHalfWidth"`
 	MenuItemFitToHeight                *gtk.RadioMenuItem     `build:"MenuItemFitToHeight"`
 	MenuItemAbout                      *gtk.MenuItem          `build:"MenuItemAbout"`
 	GoToThumbnailImage                 *gtk.Image             `build:"GoToThumbnailImage"`

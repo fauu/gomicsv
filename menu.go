@@ -89,25 +89,31 @@ func (app *App) menuInit() {
 
 	app.W.MenuItemOriginal.Connect("toggled", func() {
 		if app.W.MenuItemOriginal.GetActive() {
-			app.setZoomMode("Original")
+			app.setZoomMode(Original)
 		}
 	})
 
 	app.W.MenuItemBestFit.Connect("toggled", func() {
 		if app.W.MenuItemBestFit.GetActive() {
-			app.setZoomMode("BestFit")
+			app.setZoomMode(BestFit)
 		}
 	})
 
 	app.W.MenuItemFitToWidth.Connect("toggled", func() {
 		if app.W.MenuItemFitToWidth.GetActive() {
-			app.setZoomMode("FitToWidth")
+			app.setZoomMode(FitToWidth)
+		}
+	})
+
+	app.W.MenuItemFitToHalfWidth.Connect("toggled", func() {
+		if app.W.MenuItemFitToHalfWidth.GetActive() {
+			app.setZoomMode(FitToHalfWidth)
 		}
 	})
 
 	app.W.MenuItemFitToHeight.Connect("toggled", func() {
 		if app.W.MenuItemFitToHeight.GetActive() {
-			app.setZoomMode("FitToHeight")
+			app.setZoomMode(FitToHeight)
 		}
 	})
 
@@ -290,6 +296,7 @@ func (app *App) menuSetupAccels() {
 				{&app.W.MenuItemBestFit.MenuItem, Accel{gdk.KEY_B, 0}},
 				{&app.W.MenuItemOriginal.MenuItem, Accel{gdk.KEY_O, 0}},
 				{&app.W.MenuItemFitToWidth.MenuItem, Accel{gdk.KEY_W, 0}},
+				{&app.W.MenuItemFitToHalfWidth.MenuItem, Accel{gdk.KEY_W, gdk.MOD1_MASK}},
 				{&app.W.MenuItemFitToHeight.MenuItem, Accel{gdk.KEY_H, 0}},
 				{&app.W.MenuItemFullscreen.MenuItem, Accel{gdk.KEY_F, 0}},
 				{&app.W.MenuItemRandom.MenuItem, Accel{gdk.KEY_R, 0}},

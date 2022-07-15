@@ -117,14 +117,19 @@ func (app *App) getScaledSize() (scale float64) {
 
 	w, h := app.pixbufSize()
 	switch app.Config.ZoomMode {
-	case "FitToWidth":
+	case FitToWidth:
 		needscale := (app.Config.Enlarge && w < scrw) || (app.Config.Shrink && w > scrw)
 		if needscale {
 			return float64(scrw) / float64(w)
 		}
-	case "FitToHeight":
+	case FitToHalfWidth:
+		needscale := (app.Config.Enlarge && w/2 < scrw) || (app.Config.Shrink && w/2 > scrw)
+		if needscale {
+			return float64(scrw) / float64(w/2)
+		}
+	case FitToHeight:
 		return float64(scrh) / float64(h)
-	case "BestFit":
+	case BestFit:
 		needscale := (app.Config.Enlarge && (w < scrw && h < scrh)) || (app.Config.Shrink && (w > scrw || h > scrh))
 		if needscale {
 			fw, _ := util.Fit(w, h, scrw, scrh)

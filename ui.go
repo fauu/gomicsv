@@ -92,11 +92,13 @@ func (app *App) syncWidgetsToConfig() {
 	app.W.MenuItemMangaMode.SetActive(app.Config.MangaMode)
 
 	switch app.Config.ZoomMode {
-	case "FitToWidth":
+	case FitToWidth:
 		app.W.MenuItemFitToWidth.SetActive(true)
-	case "FitToHeight":
+	case FitToHalfWidth:
+		app.W.MenuItemFitToHalfWidth.SetActive(true)
+	case FitToHeight:
 		app.W.MenuItemFitToHeight.SetActive(true)
-	case "BestFit":
+	case BestFit:
 		app.W.MenuItemBestFit.SetActive(true)
 	default:
 		app.W.MenuItemOriginal.SetActive(true)

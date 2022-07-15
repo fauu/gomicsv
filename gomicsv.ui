@@ -218,6 +218,16 @@
                           </object>
                         </child>
                         <child>
+                          <object class="GtkRadioMenuItem" id="MenuItemFitToHalfWidth">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Fit to half-width</property>
+                            <property name="use-underline">true</property>
+                            <property name="draw-as-radio">true</property>
+                            <property name="group">MenuItemBestFit</property>
+                          </object>
+                        </child>
+                        <child>
                           <object class="GtkRadioMenuItem" id="MenuItemFitToHeight">
                             <property name="visible">true</property>
                             <property name="can-focus">false</property>

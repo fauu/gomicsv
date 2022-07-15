@@ -36,7 +36,7 @@ const (
 )
 
 type Config struct {
-	ZoomMode             string
+	ZoomMode             ZoomMode
 	Enlarge              bool
 	Shrink               bool
 	LastDirectory        string
@@ -95,7 +95,7 @@ func (app *App) saveConfig() {
 }
 
 func (c *Config) setDefaults() {
-	c.ZoomMode = "FitToWidth"
+	c.ZoomMode = FitToWidth
 	c.Shrink = true
 	c.Enlarge = true
 	c.WindowWidth = 640
@@ -152,17 +152,29 @@ func (c *Config) save(path string) error {
 	return err
 }
 
-func (app *App) setZoomMode(mode string) {
+type ZoomMode int
+
+const (
+	FitToWidth ZoomMode = iota
+	FitToHalfWidth
+	FitToHeight
+	BestFit
+	Original
+)
+
+func (app *App) setZoomMode(mode ZoomMode) {
 	switch mode {
-	case "FitToWidth":
+	case FitToWidth:
 		app.W.MenuItemFitToWidth.SetActive(true)
-	case "FitToHeight":
+	case FitToHalfWidth:
+		app.W.MenuItemFitToHalfWidth.SetActive(true)
+	case FitToHeight:
 		app.W.MenuItemFitToHeight.SetActive(true)
-	case "BestFit":
+	case BestFit:
 		app.W.MenuItemBestFit.SetActive(true)
 	default:
 		app.W.MenuItemOriginal.SetActive(true)
-		mode = "Original"
+		mode = Original
 	}
 
 	app.Config.ZoomMode = mode
