@@ -36,6 +36,7 @@ var (
 type Archive interface {
 	Load(i int, autorotate bool, nPreload int) (*gdk.Pixbuf, error)
 	Kind() Kind
+	ArchiveName() string
 	Name(i int) (string, error)
 	Len() *int // nil represents unknown length
 	Close() error

@@ -94,6 +94,10 @@ func (ar *Zip) Kind() Kind {
 	return Packed
 }
 
+func (ar *Zip) ArchiveName() string {
+	return ar.name
+}
+
 func (ar *Zip) Name(i int) (string, error) {
 	if err := ar.checkbounds(i); err != nil {
 		return "", err

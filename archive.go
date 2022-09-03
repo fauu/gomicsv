@@ -70,11 +70,6 @@ func (app *App) doLoadArchive(path string, assumeHTTPURL bool, httpReferer strin
 	app.S.ImageHashes = make(map[int]imgdiff.Hash)
 
 	app.S.ArchivePath = path
-	if assumeHTTPURL {
-		app.S.ArchiveName = path
-	} else {
-		app.S.ArchiveName = filepath.Base(path)
-	}
 
 	cache := pagecache.NewPageCache()
 	app.S.PageCache = &cache
@@ -150,7 +145,6 @@ func (app *App) archiveClose() {
 	app.S.Archive.Close()
 
 	app.S.Archive = nil
-	app.S.ArchiveName = ""
 	app.S.ArchivePath = ""
 	app.S.ArchivePos = 0
 

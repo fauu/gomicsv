@@ -93,6 +93,10 @@ func (ar *Dir) Load(i int, autorotate bool, _nPreload int) (*gdk.Pixbuf, error) 
 	return pixbuf.Load(f, autorotate)
 }
 
+func (ar *Dir) ArchiveName() string {
+	return ar.name
+}
+
 func (ar *Dir) Name(i int) (string, error) {
 	if err := ar.checkbounds(i); err != nil {
 		return "", err

@@ -153,6 +153,10 @@ func (ar *HTTP) Kind() Kind {
 	return HTTPKind
 }
 
+func (ar *HTTP) ArchiveName() string {
+	return ar.urlTemplate
+}
+
 func (ar *HTTP) Name(i int) (string, error) {
 	return ar.urlTemplate, nil
 }

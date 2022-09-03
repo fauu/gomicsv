@@ -54,7 +54,6 @@ type State struct {
 	Archive                       archive.Archive
 	ArchivePos                    int
 	ArchivePath                   string
-	ArchiveName                   string
 	PixbufL, PixbufR              *gdk.Pixbuf
 	GoToThumbPixbuf               *gdk.Pixbuf
 	Scale                         float64

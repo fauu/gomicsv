@@ -90,13 +90,13 @@ func (app *App) updateStatus() {
 			leftIndex, rightIndex = rightIndex, leftIndex
 			leftw, rightw = rightw, leftw
 		}
-		msg = fmt.Sprintf("%d+%d / %s %s |   %dx%d - %dx%d (%d%%)   |   %s   |   %s - %s", leftIndex, rightIndex, lenStr, markedStr, leftw, lefth, rightw, righth, zoom, s.ArchiveName, left, right)
-		title = fmt.Sprintf("[%d+%d / %s] %s", leftIndex, rightIndex, lenStr, s.ArchiveName)
+		msg = fmt.Sprintf("%d+%d / %s %s |   %dx%d - %dx%d (%d%%)   |   %s   |   %s - %s", leftIndex, rightIndex, lenStr, markedStr, leftw, lefth, rightw, righth, zoom, s.Archive.ArchiveName(), left, right)
+		title = fmt.Sprintf("[%d+%d / %s] %s", leftIndex, rightIndex, lenStr, s.Archive.ArchiveName())
 	} else {
 		imgPath, _ := s.Archive.Name(s.ArchivePos)
 		w, h := s.PixbufL.GetWidth(), s.PixbufL.GetHeight()
-		msg = fmt.Sprintf("%d / %s %s  |   %dx%d (%d%%)   |   %s   |   %s", s.ArchivePos+1, lenStr, markedStr, w, h, zoom, s.ArchiveName, imgPath)
-		title = fmt.Sprintf("[%d / %s] %s", s.ArchivePos+1, lenStr, s.ArchiveName)
+		msg = fmt.Sprintf("%d / %s %s  |   %dx%d (%d%%)   |   %s   |   %s", s.ArchivePos+1, lenStr, markedStr, w, h, zoom, s.Archive.ArchiveName(), imgPath)
+		title = fmt.Sprintf("[%d / %s] %s", s.ArchivePos+1, lenStr, s.Archive.ArchiveName())
 	}
 	app.setStatus(msg)
 
