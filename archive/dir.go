@@ -20,6 +20,8 @@ package archive
 
 import (
 	"errors"
+	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"sort"
@@ -36,18 +38,25 @@ type Dir struct {
 
 /* Reads filenames from a directory, and sorts them */
 func NewDir(path string) (*Dir, error) {
-	var err error
+	subPath, err := findFirstDirContainingSupportedImage(path)
+	if err != nil {
+		return nil, fmt.Errorf("searching for supported images in provided path: %v", err)
+	}
+	if subPath == nil {
+		return nil, errors.New("Could not find a directory containing supported images")
+	}
 
-	ar := new(Dir)
-
-	ar.name = filepath.Base(path)
-	ar.path = path
-
-	dir, err := os.Open(path)
+	dir, err := os.Open(*subPath)
 	if err != nil {
 		return nil, err
 	}
 	defer dir.Close()
+
+	ar := Dir{
+		filenames: nil,
+		name:      filepath.Base(*subPath),
+		path:      *subPath,
+	}
 
 	filenames, err := dir.Readdirnames(-1)
 	if err != nil {
@@ -68,7 +77,7 @@ func NewDir(path string) (*Dir, error) {
 
 	sort.Sort(ar.filenames)
 
-	return ar, nil
+	return &ar, nil
 }
 
 func (ar *Dir) checkbounds(i int) error {
@@ -116,4 +125,50 @@ func (ar *Dir) Len() *int {
 
 func (ar *Dir) Close() error {
 	return nil
+}
+
+func findFirstDirContainingSupportedImage(path string) (*string, error) {
+	dir, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer dir.Close()
+
+	entries, err := dir.ReadDir(-1)
+	if err != nil {
+		return nil, err
+	}
+
+	var subdirs []string
+	for _, entry := range entries {
+		if entry.IsDir() {
+			if subdirs == nil {
+				subdirs = make([]string, 0, len(entries))
+			}
+			subdirs = append(subdirs, entry.Name())
+		} else if extensionMatches(entry.Name(), imageExtensions) {
+			// Found supported image directly in path
+			return &path, nil
+		}
+	}
+
+	if len(subdirs) == 0 {
+		// Did not find supported image directly in path and have no subdirectories to check
+		return nil, nil
+	} else {
+		// Check subdirectories
+		for _, subDir := range subdirs {
+			var subDirPath = filepath.Join(path, subDir)
+			res, err := findFirstDirContainingSupportedImage(subDirPath)
+			if err != nil {
+				log.Printf("Error while searching for supported images in subdirectory: %v", err)
+			} else if res != nil {
+				// Found supported image in subdirectory
+				return res, nil
+			}
+		}
+	}
+
+	// Did not find supported image directly in path or in subdirectories
+	return nil, nil
 }
