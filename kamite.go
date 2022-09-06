@@ -19,12 +19,12 @@
 package gomicsv
 
 import (
+	"bytes"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"net/url"
 
 	"github.com/gotk3/gotk3/gdk"
 )
@@ -155,9 +155,10 @@ func kamiteSendOCRImageCommand(port int, imgBytes []byte, w, h int) {
 		return
 	}
 
-	_, err = http.PostForm(
+	_, err = http.Post(
 		kamiteMakeEndpointURL(port, kamiteOCRImageEndpoint),
-		url.Values{"params": {string(paramsJSON)}},
+		"application/json",
+		bytes.NewReader(paramsJSON),
 	)
 	if err != nil {
 		log.Printf("Error making HTTP request: %v", err)
