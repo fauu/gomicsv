@@ -24,44 +24,44 @@ might have been broken.
 
 ## Changes from Gomics
 
-* Add **Jumpmarks**
+* Added **Jumpmarks**
 
   Temporary page marks for quickly jumping around the currently open archive.
   See the `Jumpmarks` menu in the menu bar for more information.
 
-* Add **Hide UI** option (`Alt+M` to hide/unhide).
+* Added **Hide UI** option (`Alt+M` to hide/unhide).
 
-* Add *experimental* **HTTP archive support**
+* Added *experimental* **HTTP archive support**
 
   See `File › Open URL (experimental)` for a detailed explanation.
   A HTTP archive can alternatively be loaded by providing the URL as a program
   argument (see `./gomicsv --help`) or by pasting the URL into the program.
 
-* **Rework page navigation**
+* **Reworked page navigation**
 
   * Click the left/right half of the image area to go to the previous/next page.
 
   * Drag with the middle mouse button to pan around the image.
 
-* Add integration with **[Kamite]** (a desktop Japanese immersion companion)
+* Added integration with **[Kamite]** (a desktop Japanese immersion companion)
 
   Right-click on text block for automatic OCR. Right-hold-click to initialize
   manual block recognition selection. *Must be first enabled in Preferences.*
 
-* Add **Remember reading position** option
+* Added **Remember reading position** option
 
   Automatically saves the last reading position for each archive and resumes
   reading at that position. *Must be first enabled in Preferences.*
 
-* Add **Save image as…** command
+* Added **Save image as…** command
 
-* Add **Copy image to clipboard** command
+* Added **Copy image to clipboard** command
 
-* Polish the look of preferences UI.
+* Polished the look of preferences UI.
 
-* Make the Background color preference functional.
+* Made the Background color preference functional.
 
-* Reorganize the codebase.
+* Reorganized the codebase.
 
 * Various other minor tweaks (and breakages).
 
