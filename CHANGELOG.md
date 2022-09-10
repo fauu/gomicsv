@@ -1,6 +1,6 @@
 # Changelog — Gomics-v
 
-## [Unreleased]
+## [0.2] – 2022-09-10
 
 ### Added
 
@@ -21,9 +21,10 @@
 * The dimensions of snips sent to Kamite in automatic OCR mode (right-click)
   have been optimized.
 
-## 0.1 (2022-07-12)
+## [0.1] – 2022-07-12
 
 Initial release.
 
-[Unreleased]: https://github.com/fauu/gomicsv/compare/v0.1...HEAD
+[Unreleased]: https://github.com/fauu/gomicsv/compare/v0.2...HEAD
+[0.2]: https://github.com/fauu/gomicsv/releases/tag/v0.2
 [0.1]: https://github.com/fauu/gomicsv/releases/tag/v0.1
