@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-VERSION_TAG=$(git tag -l | grep "v" | cut -c2-);
+VERSION_TAG=$(git tag -l | grep "v" | tail -n1 | cut -c2-);
 if [[ ${#VERSION_TAG} -ne 0 ]]; then
   echo "$VERSION_TAG";
 else
