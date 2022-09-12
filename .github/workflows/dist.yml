@@ -1,6 +1,6 @@
 ---
 name: dist
-on: workflow_dispatch
+on: push
 jobs:
   dist:
     runs-on: ubuntu-latest
