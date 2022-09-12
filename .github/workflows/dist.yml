@@ -1,5 +1,6 @@
 ---
 name: dist
+on: workflow_dispatch
 jobs:
   dist:
     runs-on: ubuntu-latest
