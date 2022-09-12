@@ -2,7 +2,7 @@
 name: dist
 "on":
   push:
-    branches: [master]
+    branches: [master, explo/gh-actions]
 jobs:
   dist:
     runs-on: ubuntu-latest
