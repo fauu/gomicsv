@@ -25,6 +25,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 
 	"github.com/gotk3/gotk3/gdk"
 )
@@ -166,6 +167,6 @@ func kamiteSendOCRImageCommand(port int, imgBytes []byte, w, h int) {
 }
 
 func kamiteMakeEndpointURL(port int, suffix string) string {
-	// TODO(fau): Go 1.19+ url.JoinPath()
-	return fmt.Sprintf(kamiteCMDEndpointBaseTpl, port) + suffix
+	path, _ := url.JoinPath(fmt.Sprintf(kamiteCMDEndpointBaseTpl, port), suffix)
+	return path
 }
