@@ -119,7 +119,7 @@ func NewFile(f *os.File) *File {
 }
 
 func (r *File) Size() (int64, error) {
-	fi, err := r.Stat()
+	fi, err := r.Stat() // nolint:typecheck
 	if err != nil {
 		return 0, err
 	}
@@ -127,11 +127,11 @@ func (r *File) Size() (int64, error) {
 }
 
 func (r *File) SetSize(n int64) error {
-	return r.Truncate(n)
+	return r.Truncate(n) // nolint:typecheck
 }
 
 func (r *File) Ext() string {
-	ext := filepath.Ext(r.Name())
+	ext := filepath.Ext(r.Name()) // nolint:typecheck
 	if len(ext) <= 1 || ext[0] != '.' {
 		return ""
 	}
@@ -156,7 +156,7 @@ func (b *Buffer) SetSize(int64) error {
 }
 
 func (b *Buffer) Size() (int64, error) {
-	return int64(b.Len()), nil
+	return int64(b.Len()), nil // nolint:typecheck
 }
 
 func strcmp(a, b string, nat bool) bool {

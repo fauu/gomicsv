@@ -24,7 +24,6 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
-	"reflect"
 	"strings"
 
 	"github.com/fauu/gomicsv/archive"
@@ -119,7 +118,7 @@ func (app *App) doLoadArchive(path string, assumeHTTPURL bool, httpReferer strin
 }
 
 func (app *App) archiveIsLoaded() bool {
-	return app.S.Archive != nil && !reflect.ValueOf(app.S.Archive).IsNil() && app.S.ArchivePath != ""
+	return app.S.ArchivePath != ""
 }
 
 func (app *App) archiveGetBaseName() string {
@@ -144,7 +143,6 @@ func (app *App) archiveClose() {
 
 	app.S.Archive.Close()
 
-	app.S.Archive = nil
 	app.S.ArchivePath = ""
 	app.S.ArchivePos = 0
 
