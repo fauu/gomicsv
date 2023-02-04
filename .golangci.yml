@@ -1,0 +1,6 @@
+---
+
+run:
+  skip-dirs:
+    - ".*go/pkg.*"
+    - ".*go/src.*"

@@ -29,3 +29,7 @@ dist: build
 	zip -r ../Gomics-v_$(VERSION).zip gomicsv
 	rm -rf gomicsv
 .PHONY: dist
+
+lint:
+	golangci-lint run
+.PHONY: lint
