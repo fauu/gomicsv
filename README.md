@@ -101,7 +101,7 @@ up to 15 minutes on first compile.
 
 Gomics-v\
 Copyright (c) 2013–2021 Utkan Güngördü <utkan@freeconsole.org>\
-Copyright (c) 2021–2022 Piotr Grabowski
+Copyright (c) 2021–2023 Piotr Grabowski
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
