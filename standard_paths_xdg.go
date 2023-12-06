@@ -1,5 +1,4 @@
-//go:build linux
-// +build linux
+//go:build freebsd || linux || netbsd || openbsd || solaris
 
 /*
  * Copyright (c) 2013-2021 Utkan Güngördü <utkan@freeconsole.org>
