@@ -18,6 +18,9 @@ This fork has been made with personal use for reading manga with
 mouse-centered navigation in mind. Consequently, some aspects of other workflows
 might have been broken.
 
+The program has only been confirmed to work on Linux, but it is possible it
+would work on other platforms.
+
 <p align="center">
   <img src="screenshot.png" title="A screenshot of Gomics-v">
 </p>
@@ -69,10 +72,11 @@ might have been broken.
 
 ## Installation
 
-Download the latest release package from the [Releases] page and extract it to
-the location where you want to keep the program files (e.g., `/opt/gomicsv`).
+Download the latest release package from the [Releases] page (Linux only) and
+extract it to the location where you want to keep the program files (e.g.,
+`/opt/gomicsv`).
 
-Or build it from the source:
+Or build it from the source (see below).
 
 [Releases]: https://github.com/fauu/gomicsv/releases
 
@@ -93,6 +97,14 @@ A self-contained Gomics-v executable will be produced at `target/gomicsv`.
 Building requires [go] and some GTK-related dependencies. See
 [gomics: Requirements][gomics-requirements]. GTK-related build steps might take
 up to 15 minutes on first compile.
+
+---
+
+Extra information for Windows and macOS:
+
+- <https://github.com/gotk3/gotk3/wiki/Installing-on-Windows>
+
+- <https://github.com/gotk3/gotk3/wiki/Installing-on-macOS>
 
 [go]: https://go.dev/
 [gomics-requirements]: https://github.com/salviati/gomics#requirements
