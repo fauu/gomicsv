@@ -202,6 +202,7 @@ func (app *App) setHideUI(hideUI bool) {
 	app.Config.HideUI = hideUI
 	app.toggleHideUI(hideUI)
 	app.W.MenuItemHideUI.SetActive(hideUI)
+	app.S.UITemporarilyRevealed = false
 }
 
 func (app *App) setShrink(shrink bool) {

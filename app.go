@@ -70,6 +70,7 @@ type State struct {
 	RecentManager                 *gtk.RecentManager
 	BackgroundColorCssProvider    *gtk.CssProvider
 	PageCacheTrimTimeoutHandle    *glib.SourceHandle
+	UITemporarilyRevealed         bool
 }
 
 //go:embed about.jpg
@@ -235,6 +236,11 @@ func (app *App) handleKeyPress(key uint, shift bool, ctrl bool) {
 			app.W.MenuItemNextArchive.Activate()
 		} else {
 			app.W.MenuItemNextPage.Activate()
+		}
+	case gdk.KEY_Alt_L:
+		if app.Config.HideUI {
+			app.S.UITemporarilyRevealed = !app.S.UITemporarilyRevealed
+			app.toggleHideUI(!app.S.UITemporarilyRevealed)
 		}
 	}
 }

@@ -35,6 +35,12 @@ func (app *App) imageAreaInit() {
 	})
 
 	app.W.ScrolledWindow.Connect("button-press-event", func(self *gtk.ScrolledWindow, event *gdk.Event) bool {
+		if app.S.UITemporarilyRevealed {
+			app.S.UITemporarilyRevealed = false
+			app.toggleHideUI(true)
+			return true
+		}
+
 		be := &gdk.EventButton{Event: event}
 		switch be.Button() {
 		case 1:
