@@ -170,6 +170,28 @@
                         <property name="visible">true</property>
                         <property name="can-focus">false</property>
                         <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemFullscreen">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Fullscreen</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckMenuItem" id="MenuItemHideUI">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                            <property name="label" translatable="yes">Hide UI</property>
+                            <property name="use-underline">true</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparatorMenuItem" id="menuitem0">
+                            <property name="visible">true</property>
+                            <property name="can-focus">false</property>
+                          </object>
+                        </child>
+                        <child>
                           <object class="GtkCheckMenuItem" id="MenuItemShrink">
                             <property name="visible">true</property>
                             <property name="can-focus">false</property>
@@ -242,22 +264,6 @@
                           <object class="GtkSeparatorMenuItem" id="menuitem2">
                             <property name="visible">true</property>
                             <property name="can-focus">false</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkCheckMenuItem" id="MenuItemFullscreen">
-                            <property name="visible">true</property>
-                            <property name="can-focus">false</property>
-                            <property name="label" translatable="yes">Fullscreen</property>
-                            <property name="use-underline">true</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkCheckMenuItem" id="MenuItemHideUI">
-                            <property name="visible">true</property>
-                            <property name="can-focus">false</property>
-                            <property name="label" translatable="yes">Hide UI</property>
-                            <property name="use-underline">true</property>
                           </object>
                         </child>
                         <child>
