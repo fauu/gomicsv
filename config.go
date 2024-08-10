@@ -194,29 +194,13 @@ func (app *App) setVFlip(vflip bool) {
 
 func (app *App) setFullscreen(fullscreen bool) {
 	app.Config.Fullscreen = fullscreen
-
-	if fullscreen {
-		app.W.MainWindow.Fullscreen()
-	} else {
-		app.W.MainWindow.Unfullscreen()
-	}
-
+	app.toggleFullscreen(fullscreen)
 	app.W.MenuItemFullscreen.SetActive(fullscreen)
 }
 
 func (app *App) setHideUI(hideUI bool) {
 	app.Config.HideUI = hideUI
-
-	if hideUI {
-		app.W.Menubar.Hide()
-		app.W.Toolbar.Hide()
-		app.W.Statusbar.Hide()
-	} else {
-		app.W.Menubar.Show()
-		app.W.Toolbar.Show()
-		app.W.Statusbar.Show()
-	}
-
+	app.toggleHideUI(hideUI)
 	app.W.MenuItemHideUI.SetActive(hideUI)
 }
 

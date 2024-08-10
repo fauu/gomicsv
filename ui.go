@@ -119,3 +119,23 @@ func (app *App) syncWidgetsToConfig() {
 	app.W.KamitePortContainer.SetSensitive(app.Config.KamiteEnabled)
 	app.W.KamitePortEntry.SetText(fmt.Sprint(app.Config.KamitePort))
 }
+
+func (app *App) toggleHideUI(hideUI bool) {
+	if hideUI {
+		app.W.Menubar.Hide()
+		app.W.Toolbar.Hide()
+		app.W.Statusbar.Hide()
+	} else {
+		app.W.Menubar.Show()
+		app.W.Toolbar.Show()
+		app.W.Statusbar.Show()
+	}
+}
+
+func (app *App) toggleFullscreen(fullscreen bool) {
+	if fullscreen {
+		app.W.MainWindow.Fullscreen()
+	} else {
+		app.W.MainWindow.Unfullscreen()
+	}
+}
