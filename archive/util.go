@@ -37,7 +37,7 @@ type Loader interface {
 	Len() int
 }
 
-var archiveExtensions = []string{".zip", ".cbz"}
+var archiveExtensions = []string{".zip", ".cbz", ".rar"}
 var imageExtensions []string
 
 func init() {

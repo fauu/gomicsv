@@ -23,6 +23,7 @@
     <mime-types>
       <mime-type>application/zip</mime-type>
       <mime-type>application/x-cbz</mime-type>
+      <mime-type>application/vnd.rar</mime-type>
     </mime-types>
   </object>
   <object class="GtkRecentFilter" id="RecentFilter">

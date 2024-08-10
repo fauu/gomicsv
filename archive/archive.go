@@ -64,7 +64,9 @@ func NewArchive(path string, pageCache *pagecache.PageCache, httpReferer string)
 	switch ext {
 	case "zip", "cbz":
 		return NewZip(path)
-	case "7z", "rar", "tar", "tgz", "gz", "tbz2", "cb7", "cbr", "cbt", "lha":
+	case "rar":
+		return NewRar(path)
+	case "7z", "tar", "tgz", "gz", "tbz2", "cb7", "cbr", "cbt", "lha":
 		return nil, errors.New("Archive type not supported, please unpack it first")
 	}
 
