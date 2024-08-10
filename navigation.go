@@ -293,7 +293,7 @@ func (app *App) currentArchiveIdx() (idx int, err error) {
 		}
 	}
 	if idx == -1 {
-		return 0, errors.New("Couldn't find the current archive in the current dir. Deleted, perhaps?")
+		return 0, errors.New("could not find the current archive in the current directory. Deleted, perhaps?")
 	}
 	return
 }
@@ -321,7 +321,7 @@ func (app *App) archiveNameRelativeToCurrent(relIdx int) (newName string, err er
 
 	idx := currIdx + relIdx
 	if idx < 0 || idx >= len(arNames) {
-		err = errors.New("No more archives in the directory")
+		err = errors.New("no more archives in the directory")
 		return
 	}
 
