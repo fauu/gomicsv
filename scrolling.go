@@ -95,6 +95,7 @@ func (app *App) scroll(dx, dy float64) {
 }
 
 func (app *App) scrollToStart() {
+	app.W.ScrolledWindow.SetVAdjustment(nil)          // Needed to prevent a bug where it scrolls back by itself
 	app.W.ScrolledWindow.GetVAdjustment().SetValue(0) // Vertical: top
 
 	var newHadj float64 = 0
@@ -102,18 +103,21 @@ func (app *App) scrollToStart() {
 		imgw, _ := app.getImageAreaInnerSize()
 		newHadj = float64(imgw)
 	}
+	app.W.ScrolledWindow.SetHAdjustment(nil)
 	app.W.ScrolledWindow.GetHAdjustment().SetValue(newHadj) // Horizontal: left (non-manga) or right (manga) edge
 }
 
 func (app *App) scrollToEnd() {
 	imgw, imgh := app.getImageAreaInnerSize()
 
+	app.W.ScrolledWindow.SetVAdjustment(nil)
 	app.W.ScrolledWindow.GetVAdjustment().SetValue(float64(imgh)) // Vertical: bottom
 
 	var newHadj float64 = 0
 	if !app.Config.MangaMode {
 		newHadj = float64(imgw)
 	}
+	app.W.ScrolledWindow.SetHAdjustment(nil)
 	app.W.ScrolledWindow.GetHAdjustment().SetValue(newHadj) // Horizontal: left (manga) or right (non-manga) edge
 }
 
