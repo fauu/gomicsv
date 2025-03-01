@@ -134,7 +134,7 @@ func (ar *Rar) Load(i int, autorotate bool, _nPreload int) (*gdk.Pixbuf, error) 
 		}
 	}
 
-	return nil, fmt.Errorf(ar.name + ": could not find a file inside the rar archive")
+	return nil, fmt.Errorf("%s: could not find a file inside the rar archive", ar.name)
 }
 
 func (ar *Rar) Kind() Kind {
