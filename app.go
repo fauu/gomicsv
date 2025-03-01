@@ -49,28 +49,29 @@ type App struct {
 }
 
 type State struct {
-	BuildInfo                     BuildInfo
-	GTKApplication                *gtk.Application
-	Archive                       archive.Archive
-	ArchivePos                    int
-	ArchivePath                   string
-	PixbufL, PixbufR              *gdk.Pixbuf
-	GoToThumbPixbuf               *gdk.Pixbuf
-	Scale                         float64
-	PageCache                     *pagecache.PageCache
-	ConfigDirPath                 string
-	UserDataDirPath               string
-	ReadLaterDirPath              string
-	ImageHashes                   map[int]imgdiff.Hash
-	Jumpmarks                     Jumpmarks
-	Cursor                        CursorsState
-	DragScroll                    DragScroll
-	SmartScrollInProgress         bool
-	KamiteRightClickActionPending bool
-	RecentManager                 *gtk.RecentManager
-	BackgroundColorCssProvider    *gtk.CssProvider
-	PageCacheTrimTimeoutHandle    *glib.SourceHandle
-	UITemporarilyRevealed         bool
+	BuildInfo                           BuildInfo
+	GTKApplication                      *gtk.Application
+	Archive                             archive.Archive
+	ArchivePos                          int
+	ArchivePath                         string
+	PixbufL, PixbufR                    *gdk.Pixbuf
+	GoToThumbPixbuf                     *gdk.Pixbuf
+	Scale                               float64
+	PageCache                           *pagecache.PageCache
+	ConfigDirPath                       string
+	UserDataDirPath                     string
+	ReadLaterDirPath                    string
+	ImageHashes                         map[int]imgdiff.Hash
+	Jumpmarks                           Jumpmarks
+	Cursor                              CursorsState
+	DragScroll                          DragScroll
+	SmartScrollInProgress               bool
+	KamiteRightClickActionPending       bool
+	RecentManager                       *gtk.RecentManager
+	BackgroundColorCssProvider          *gtk.CssProvider
+	PageCacheTrimTimeoutHandle          *glib.SourceHandle
+	UITemporarilyRevealed               bool
+	MirrorNavigationButtonsTextReversed bool
 }
 
 //go:embed about.jpg
@@ -199,19 +200,19 @@ func (app *App) handleKeyPress(key uint, shift bool, ctrl bool) {
 		}
 	case gdk.KEY_Right:
 		if ctrl {
-			app.nextScene()
+			app.sceneRight()
 		} else if shift {
 			app.scroll(1, 0)
 		} else {
-			app.nextPage()
+			app.pageRight()
 		}
 	case gdk.KEY_Left:
 		if ctrl {
-			app.previousScene()
+			app.sceneLeft()
 		} else if shift {
 			app.scroll(-1, 0)
 		} else {
-			app.previousPage()
+			app.pageLeft()
 		}
 	case gdk.KEY_space:
 		if ctrl {

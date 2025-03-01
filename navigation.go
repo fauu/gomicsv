@@ -40,6 +40,70 @@ func (app *App) randomPage() {
 	app.setPage(rand.Int() % *app.S.Archive.Len())
 }
 
+func (app *App) pageLeft() {
+	if app.Config.MangaMode {
+		app.nextPage()
+	} else {
+		app.previousPage()
+	}
+}
+
+func (app *App) pageRight() {
+	if app.Config.MangaMode {
+		app.previousPage()
+	} else {
+		app.nextPage()
+	}
+}
+
+func (app *App) skipLeft() {
+	if app.Config.MangaMode {
+		app.skipForward()
+	} else {
+		app.skipBackward()
+	}
+}
+
+func (app *App) skipRight() {
+	if app.Config.MangaMode {
+		app.skipBackward()
+	} else {
+		app.skipForward()
+	}
+}
+
+func (app *App) leftmostPage() {
+	if app.Config.MangaMode {
+		app.lastPage()
+	} else {
+		app.firstPage()
+	}
+}
+
+func (app *App) rightmostPage() {
+	if app.Config.MangaMode {
+		app.firstPage()
+	} else {
+		app.lastPage()
+	}
+}
+
+func (app *App) archiveLeft() {
+	if app.Config.MangaMode {
+		app.nextArchive()
+	} else {
+		app.previousArchive()
+	}
+}
+
+func (app *App) archiveRight() {
+	if app.Config.MangaMode {
+		app.previousArchive()
+	} else {
+		app.nextArchive()
+	}
+}
+
 func (app *App) previousPage() {
 	if !app.archiveIsLoaded() {
 		if app.Config.Seamless {
@@ -150,6 +214,22 @@ func (app *App) skipForward() {
 
 func (app *App) skipBackward() {
 	app.setPage(app.S.ArchivePos - app.Config.NSkip)
+}
+
+func (app *App) sceneLeft() {
+	if app.Config.MangaMode {
+		app.nextScene()
+	} else {
+		app.previousScene()
+	}
+}
+
+func (app *App) sceneRight() {
+	if app.Config.MangaMode {
+		app.previousScene()
+	} else {
+		app.nextScene()
+	}
 }
 
 func (app *App) nextScene() {

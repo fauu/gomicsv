@@ -237,6 +237,11 @@ func (app *App) setDoublePage(doublePage bool) {
 
 func (app *App) setMangaMode(mangaMode bool) {
 	app.Config.MangaMode = mangaMode
+
+	if mangaMode != app.S.MirrorNavigationButtonsTextReversed {
+		app.reverseMirrorNavigationButtonsText()
+	}
+
 	app.blit()
 	app.updateStatus()
 }

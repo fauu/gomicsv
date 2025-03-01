@@ -38,12 +38,12 @@ func (app *App) menuInit() {
 
 	app.W.MenuItemQuit.Connect("activate", app.quit)
 	app.W.MenuItemClose.Connect("activate", app.archiveClose)
-	app.W.MenuItemNextPage.Connect("activate", app.nextPage)
 	app.W.MenuItemPreviousPage.Connect("activate", app.previousPage)
+	app.W.MenuItemNextPage.Connect("activate", app.nextPage)
 	app.W.MenuItemFirstPage.Connect("activate", app.firstPage)
 	app.W.MenuItemLastPage.Connect("activate", app.lastPage)
-	app.W.MenuItemNextArchive.Connect("activate", app.nextArchive)
 	app.W.MenuItemPreviousArchive.Connect("activate", app.previousArchive)
+	app.W.MenuItemNextArchive.Connect("activate", app.nextArchive)
 	app.W.MenuItemSkipForward.Connect("activate", app.skipForward)
 	app.W.MenuItemSkipBackward.Connect("activate", app.skipBackward)
 

@@ -18,13 +18,50 @@
 
 package gomicsv
 
+import (
+	"log"
+
+	"github.com/gotk3/gotk3/gtk"
+)
+
 func (app *App) toolbarInit() {
-	app.W.ButtonNextPage.Connect("clicked", app.nextPage)
-	app.W.ButtonPreviousPage.Connect("clicked", app.previousPage)
-	app.W.ButtonFirstPage.Connect("clicked", app.firstPage)
-	app.W.ButtonLastPage.Connect("clicked", app.lastPage)
-	app.W.ButtonNextArchive.Connect("clicked", app.nextArchive)
-	app.W.ButtonPreviousArchive.Connect("clicked", app.previousArchive)
-	app.W.ButtonSkipForward.Connect("clicked", app.skipForward)
-	app.W.ButtonSkipBackward.Connect("clicked", app.skipBackward)
+	app.W.ButtonPageLeft.Connect("clicked", app.pageLeft)
+	app.W.ButtonPageRight.Connect("clicked", app.pageRight)
+	app.W.ButtonLeftmostPage.Connect("clicked", app.leftmostPage)
+	app.W.ButtonRightmostPage.Connect("clicked", app.rightmostPage)
+	app.W.ButtonLeftArchive.Connect("clicked", app.archiveLeft)
+	app.W.ButtonRightArchive.Connect("clicked", app.archiveRight)
+	app.W.ButtonSkipLeft.Connect("clicked", app.skipLeft)
+	app.W.ButtonSkipRight.Connect("clicked", app.skipRight)
+}
+
+func swapToolButtonsText(a, b *gtk.ToolButton) {
+	var err error
+
+	tmp := a.GetLabel()
+	a.SetLabel(b.GetLabel())
+	b.SetLabel(tmp)
+
+	aTooltipText, err := a.GetTooltipText()
+	if err != nil {
+		log.Printf("Error getting TooltipButton text: %v", err)
+		return
+	}
+	bTooltipText, err := b.GetTooltipText()
+	if err != nil {
+		log.Printf("Error getting TooltipButton text: %v", err)
+		return
+	}
+
+	// NOTE: SetTooltipText() fails silently
+	a.SetProperty("tooltip-text", bTooltipText)
+	b.SetProperty("tooltip-text", aTooltipText)
+}
+
+func (app *App) reverseMirrorNavigationButtonsText() {
+	swapToolButtonsText(app.W.ButtonPageLeft, app.W.ButtonPageRight)
+	swapToolButtonsText(app.W.ButtonSkipLeft, app.W.ButtonSkipRight)
+	swapToolButtonsText(app.W.ButtonLeftmostPage, app.W.ButtonRightmostPage)
+	swapToolButtonsText(app.W.ButtonLeftArchive, app.W.ButtonRightArchive)
+	app.S.MirrorNavigationButtonsTextReversed = !app.S.MirrorNavigationButtonsTextReversed
 }

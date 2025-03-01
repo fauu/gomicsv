@@ -45,9 +45,9 @@ func (app *App) imageAreaInit() {
 		switch be.Button() {
 		case 1:
 			if (int)(be.X()) < self.GetAllocatedWidth()/2 {
-				app.previousPage()
+				app.pageLeft()
 			} else {
-				app.nextPage()
+				app.pageRight()
 			}
 		case 3:
 			if app.Config.KamiteEnabled {

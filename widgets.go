@@ -57,22 +57,22 @@ type Widgets struct {
 	OpenURLDialogExplanationLabel      *gtk.Label             `build:"OpenURLDialogExplanationLabel"`
 	OpenURLDialogRefererEntry          *gtk.Entry             `build:"OpenURLDialogRefererEntry"`
 	Toolbar                            *gtk.Toolbar           `build:"Toolbar"`
-	ButtonNextPage                     *gtk.ToolButton        `build:"ButtonNextPage"`
-	ButtonPreviousPage                 *gtk.ToolButton        `build:"ButtonPreviousPage"`
-	ButtonLastPage                     *gtk.ToolButton        `build:"ButtonLastPage"`
-	ButtonFirstPage                    *gtk.ToolButton        `build:"ButtonFirstPage"`
-	ButtonNextArchive                  *gtk.ToolButton        `build:"ButtonNextArchive"`
-	ButtonPreviousArchive              *gtk.ToolButton        `build:"ButtonPreviousArchive"`
-	ButtonSkipForward                  *gtk.ToolButton        `build:"ButtonSkipForward"`
-	ButtonSkipBackward                 *gtk.ToolButton        `build:"ButtonSkipBackward"`
-	MenuItemNextPage                   *gtk.MenuItem          `build:"MenuItemNextPage"`
+	ButtonPageLeft                     *gtk.ToolButton        `build:"ButtonPreviousPage"`
+	ButtonPageRight                    *gtk.ToolButton        `build:"ButtonNextPage"`
+	ButtonLeftmostPage                 *gtk.ToolButton        `build:"ButtonLeftmostPage"`
+	ButtonRightmostPage                *gtk.ToolButton        `build:"ButtonRightmostPage"`
+	ButtonLeftArchive                  *gtk.ToolButton        `build:"ButtonLeftArchive"`
+	ButtonRightArchive                 *gtk.ToolButton        `build:"ButtonRightArchive"`
+	ButtonSkipLeft                     *gtk.ToolButton        `build:"ButtonSkipLeft"`
+	ButtonSkipRight                    *gtk.ToolButton        `build:"ButtonSkipRight"`
 	MenuItemPreviousPage               *gtk.MenuItem          `build:"MenuItemPreviousPage"`
-	MenuItemLastPage                   *gtk.MenuItem          `build:"MenuItemLastPage"`
+	MenuItemNextPage                   *gtk.MenuItem          `build:"MenuItemNextPage"`
 	MenuItemFirstPage                  *gtk.MenuItem          `build:"MenuItemFirstPage"`
-	MenuItemNextArchive                *gtk.MenuItem          `build:"MenuItemNextArchive"`
+	MenuItemLastPage                   *gtk.MenuItem          `build:"MenuItemLastPage"`
 	MenuItemPreviousArchive            *gtk.MenuItem          `build:"MenuItemPreviousArchive"`
-	MenuItemSkipForward                *gtk.MenuItem          `build:"MenuItemSkipForward"`
+	MenuItemNextArchive                *gtk.MenuItem          `build:"MenuItemNextArchive"`
 	MenuItemSkipBackward               *gtk.MenuItem          `build:"MenuItemSkipBackward"`
+	MenuItemSkipForward                *gtk.MenuItem          `build:"MenuItemSkipForward"`
 	MenuItemEnlarge                    *gtk.CheckMenuItem     `build:"MenuItemEnlarge"`
 	MenuItemShrink                     *gtk.CheckMenuItem     `build:"MenuItemShrink"`
 	MenuItemFullscreen                 *gtk.CheckMenuItem     `build:"MenuItemFullscreen"`

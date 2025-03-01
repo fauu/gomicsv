@@ -84,8 +84,8 @@ func (app *App) doLoadArchive(path string, assumeHTTPURL bool, httpReferer strin
 
 	app.archiveHandleLenKnowledge(app.S.Archive.Len() != nil)
 
-	app.W.ButtonNextArchive.SetSensitive(!assumeHTTPURL)
-	app.W.ButtonPreviousArchive.SetSensitive(!assumeHTTPURL)
+	app.W.ButtonRightArchive.SetSensitive(!assumeHTTPURL)
+	app.W.ButtonLeftArchive.SetSensitive(!assumeHTTPURL)
 
 	app.W.MenuItemCopyImageToClipboard.SetSensitive(true)
 
@@ -171,7 +171,13 @@ func (app *App) archiveClose() {
 }
 
 func (app *App) archiveHandleLenKnowledge(known bool) {
-	app.W.ButtonLastPage.SetSensitive(known)
+	var lastPageButton *gtk.ToolButton
+	if app.Config.MangaMode {
+		lastPageButton = app.W.ButtonLeftmostPage
+	} else {
+		lastPageButton = app.W.ButtonRightmostPage
+	}
+	lastPageButton.SetSensitive(known)
 	app.W.MenuItemLastPage.SetSensitive(known)
 	app.W.MenuItemRandom.SetSensitive(known)
 }
