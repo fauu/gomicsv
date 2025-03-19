@@ -36,36 +36,37 @@ const (
 )
 
 type Config struct {
-	ZoomMode             ZoomMode
-	Enlarge              bool
-	Shrink               bool
-	LastDirectory        string
-	Fullscreen           bool
-	HideUI               bool
-	WindowWidth          int
-	WindowHeight         int
-	Random               bool
-	Seamless             bool
-	HFlip                bool
-	VFlip                bool
-	DoublePage           bool
-	MangaMode            bool
-	BackgroundColor      Color
-	NSkip                int
-	NPreload             int
-	RememberRecent       bool
-	RememberPosition     bool
-	RememberPositionHTTP bool
-	OneWide              bool
-	EmbeddedOrientation  bool
-	Interpolation        int
-	ImageDiffThres       float32
-	SceneScanSkip        int
-	SmartScroll          bool
-	HideIdleCursor       bool
-	KamiteEnabled        bool
-	KamitePort           int
-	Bookmarks            []Bookmark
+	ZoomMode                   ZoomMode
+	Enlarge                    bool
+	Shrink                     bool
+	LastDirectory              string
+	Fullscreen                 bool
+	HideUI                     bool
+	WindowWidth                int
+	WindowHeight               int
+	Random                     bool
+	Seamless                   bool
+	HFlip                      bool
+	VFlip                      bool
+	DoublePage                 bool
+	MangaMode                  bool
+	BackgroundColor            Color
+	NSkip                      int
+	NPreload                   int
+	RememberRecent             bool
+	RememberPosition           bool
+	RememberPositionHTTP       bool
+	OneWide                    bool
+	EmbeddedOrientation        bool
+	Interpolation              int
+	ImageDiffThres             float32
+	SceneScanSkip              int
+	SmartScroll                bool
+	MangaModeReverseNavigation bool
+	HideIdleCursor             bool
+	KamiteEnabled              bool
+	KamitePort                 int
+	Bookmarks                  []Bookmark
 }
 
 func (app *App) configFilePath() string {
@@ -237,11 +238,7 @@ func (app *App) setDoublePage(doublePage bool) {
 
 func (app *App) setMangaMode(mangaMode bool) {
 	app.Config.MangaMode = mangaMode
-
-	if mangaMode != app.S.MirrorNavigationButtonsTextReversed {
-		app.reverseMirrorNavigationButtonsText()
-	}
-
+	app.syncMirrorNavigationButtonsTextDirection()
 	app.blit()
 	app.updateStatus()
 }
@@ -299,6 +296,11 @@ func (app *App) setSmartScroll(smartScroll bool) {
 	app.Config.SmartScroll = smartScroll
 }
 
+func (app *App) setMangaModeReverseNavigation(mangaModeReverseNavigation bool) {
+	app.Config.MangaModeReverseNavigation = mangaModeReverseNavigation
+	app.syncMirrorNavigationButtonsTextDirection()
+}
+
 func (app *App) setHideIdleCursor(hideIdleCursor bool) {
 	app.Config.HideIdleCursor = hideIdleCursor
 }
@@ -315,4 +317,10 @@ func (app *App) setKamiteEnabled(kamiteEnable bool) {
 
 func (app *App) setKamitePort(kamitePort int) {
 	app.Config.KamitePort = kamitePort
+}
+
+func (app *App) syncMirrorNavigationButtonsTextDirection() {
+	if app.isNavigationRightToLeft() != app.S.MirrorNavigationButtonsTextReversed {
+		app.reverseMirrorNavigationButtonsText()
+	}
 }

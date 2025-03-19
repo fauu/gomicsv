@@ -1110,6 +1110,15 @@ Copyright (c) 2021–2025 Piotr Grabowski</property>
                   </object>
                 </child>
                 <child>
+                  <object class="GtkCheckButton" id="MangaModeReverseNavigationCheckButton">
+                    <property name="label" translatable="yes">Manga mode: Next page to the right</property>
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="receives-default">false</property>
+                    <property name="draw-indicator">true</property>
+                    <property name="margin-bottom">5</property>
+                  </object>
+                </child>
               </object>
             </child>
             <child type="tab">
@@ -1138,16 +1147,6 @@ Copyright (c) 2021–2025 Piotr Grabowski</property>
                 <child>
                   <object class="GtkCheckButton" id="EmbeddedOrientationCheckButton">
                     <property name="label" translatable="yes">Automatically rotate images according to EXIF data</property>
-                    <property name="visible">true</property>
-                    <property name="can-focus">true</property>
-                    <property name="receives-default">false</property>
-                    <property name="draw-indicator">true</property>
-                    <property name="margin-bottom">5</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkCheckButton" id="SmartScrollCheckButton">
-                    <property name="label" translatable="yes">Use smart scroll</property>
                     <property name="visible">true</property>
                     <property name="can-focus">true</property>
                     <property name="receives-default">false</property>

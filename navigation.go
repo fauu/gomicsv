@@ -40,8 +40,12 @@ func (app *App) randomPage() {
 	app.setPage(rand.Int() % *app.S.Archive.Len())
 }
 
+func (app *App) isNavigationRightToLeft() bool {
+	return app.Config.MangaMode && !app.Config.MangaModeReverseNavigation
+}
+
 func (app *App) pageLeft() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.nextPage()
 	} else {
 		app.previousPage()
@@ -49,7 +53,7 @@ func (app *App) pageLeft() {
 }
 
 func (app *App) pageRight() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.previousPage()
 	} else {
 		app.nextPage()
@@ -57,7 +61,7 @@ func (app *App) pageRight() {
 }
 
 func (app *App) skipLeft() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.skipForward()
 	} else {
 		app.skipBackward()
@@ -65,7 +69,7 @@ func (app *App) skipLeft() {
 }
 
 func (app *App) skipRight() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.skipBackward()
 	} else {
 		app.skipForward()
@@ -73,7 +77,7 @@ func (app *App) skipRight() {
 }
 
 func (app *App) leftmostPage() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.lastPage()
 	} else {
 		app.firstPage()
@@ -81,7 +85,7 @@ func (app *App) leftmostPage() {
 }
 
 func (app *App) rightmostPage() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.firstPage()
 	} else {
 		app.lastPage()
@@ -89,7 +93,7 @@ func (app *App) rightmostPage() {
 }
 
 func (app *App) archiveLeft() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.nextArchive()
 	} else {
 		app.previousArchive()
@@ -97,7 +101,7 @@ func (app *App) archiveLeft() {
 }
 
 func (app *App) archiveRight() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.previousArchive()
 	} else {
 		app.nextArchive()
@@ -217,7 +221,7 @@ func (app *App) skipBackward() {
 }
 
 func (app *App) sceneLeft() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.nextScene()
 	} else {
 		app.previousScene()
@@ -225,7 +229,7 @@ func (app *App) sceneLeft() {
 }
 
 func (app *App) sceneRight() {
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		app.previousScene()
 	} else {
 		app.nextScene()

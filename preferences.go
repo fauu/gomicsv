@@ -48,6 +48,14 @@ func (app *App) preferencesInit() {
 		app.setInterpolation(self.GetActive())
 	})
 
+	app.W.SmartScrollCheckButton.Connect("toggled", func(self *gtk.CheckButton) {
+		app.setSmartScroll(self.GetActive())
+	})
+
+	app.W.MangaModeReverseNavigationCheckButton.Connect("toggled", func(self *gtk.CheckButton) {
+		app.setMangaModeReverseNavigation(self.GetActive())
+	})
+
 	app.W.RememberRecentCheckButton.Connect("toggled", func(self *gtk.CheckButton) {
 		app.setRememberRecent(self.GetActive())
 	})
@@ -66,10 +74,6 @@ func (app *App) preferencesInit() {
 
 	app.W.OneWideCheckButton.Connect("toggled", func(self *gtk.CheckButton) {
 		app.setOneWide(self.GetActive())
-	})
-
-	app.W.SmartScrollCheckButton.Connect("toggled", func(self *gtk.CheckButton) {
-		app.setSmartScroll(self.GetActive())
 	})
 
 	app.W.EmbeddedOrientationCheckButton.Connect("toggled", func(self *gtk.CheckButton) {

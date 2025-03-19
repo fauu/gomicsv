@@ -172,7 +172,7 @@ func (app *App) archiveClose() {
 
 func (app *App) archiveHandleLenKnowledge(known bool) {
 	var lastPageButton *gtk.ToolButton
-	if app.Config.MangaMode {
+	if app.isNavigationRightToLeft() {
 		lastPageButton = app.W.ButtonLeftmostPage
 	} else {
 		lastPageButton = app.W.ButtonRightmostPage
