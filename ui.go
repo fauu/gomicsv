@@ -108,6 +108,7 @@ func (app *App) syncWidgetsToConfig() {
 	app.W.BackgroundColorButton.SetRGBA(&rgba)
 
 	app.W.InterpolationComboBoxText.SetActive(app.Config.Interpolation)
+app.W.SmartScrollCheckButton.SetActive(app.Config.SmartScroll)
 	app.W.OneWideCheckButton.SetActive(app.Config.OneWide)
 	app.W.RememberRecentCheckButton.SetActive(app.Config.RememberRecent)
 	app.W.RememberPositionCheckButton.SetActive(app.Config.RememberPosition)
