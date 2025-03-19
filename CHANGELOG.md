@@ -1,5 +1,32 @@
 # Changelog — Gomics-v
 
+## Unreleased
+
+### Added
+
+* RAR archive support.
+
+* When the UI is hidden, it can now be temporarily revealed using the
+  <kbd>Alt</kbd> key.
+
+### Changed
+
+* In Manga mode, pages now progress from right to left by default.
+
+  The old behaviour (left-to-right) can be restored in
+  `Preferences › Behavior`.
+
+* "Smart scroll" preference was renamed to "Scroll across page boundaries" and
+  moved to the Behavior tab.
+
+### Fixed
+
+* Auto-scroll to the beginning/end of the page after switching to the
+  next/previous page respectively now works consistently.
+
+* "Smart scroll"/"Scroll across page boundaries" preference state is now
+  correctly reflected in the UI after program restart.
+
 ## [0.2] – 2022-09-10
 
 ### Added
