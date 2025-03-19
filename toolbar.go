@@ -44,26 +44,30 @@ func swapToolButtonsText(a, b *gtk.ToolButton) {
 
 	aTooltipText, err := a.GetTooltipText()
 	if err != nil {
-		log.Printf("Error getting TooltipButton text: %v", err)
+		logSetTooltipTextError(err)
 		return
 	}
 	bTooltipText, err := b.GetTooltipText()
 	if err != nil {
-		log.Printf("Error getting TooltipButton text: %v", err)
+		logSetTooltipTextError(err)
 		return
 	}
 
 	// NOTE: SetTooltipText() fails silently
 	err = a.SetProperty("tooltip-text", bTooltipText)
 	if err != nil {
-		log.Printf("Error setting TooltipButton text: %v", err)
+		logSetTooltipTextError(err)
 		return
 	}
 	err = b.SetProperty("tooltip-text", aTooltipText)
 	if err != nil {
-		log.Printf("Error setting TooltipButton text: %v", err)
+		logSetTooltipTextError(err)
 		return
 	}
+}
+
+func logSetTooltipTextError(err error) {
+	log.Printf("Error setting TooltipButton text: %v", err)
 }
 
 func (app *App) reverseMirrorNavigationButtonsText() {
