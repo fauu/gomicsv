@@ -89,6 +89,22 @@ func (app *App) doLoadArchive(path string, assumeHTTPURL bool, httpReferer strin
 
 	app.W.MenuItemCopyImageToClipboard.SetSensitive(true)
 
+	if !assumeHTTPURL {
+		err := os.Chdir(filepath.Dir(app.S.ArchivePath))
+		if err != nil {
+			log.Printf("Could not chdir into archive path: %v", err)
+			return
+		}
+
+		if app.Config.RememberRecent {
+			u := &url.URL{Path: path, Scheme: "file"}
+			ok := app.S.RecentManager.AddItem(u.String())
+			if !ok {
+				log.Printf("Could not add %s as a recent item", path)
+			}
+		}
+	}
+
 	startPage := 0
 	if (!assumeHTTPURL && app.Config.RememberPosition) || (assumeHTTPURL && app.Config.RememberPositionHTTP) {
 		savedArchivePos, err := app.loadReadingPosition(path)
@@ -99,22 +115,6 @@ func (app *App) doLoadArchive(path string, assumeHTTPURL bool, httpReferer strin
 		}
 	}
 	app.doSetPage(startPage)
-
-	if !assumeHTTPURL {
-		err := os.Chdir(app.S.ArchivePath) // UNCLEAR(fau): Is this for relative paths to work or something?
-		if err != nil {
-			log.Println("Couldn't chdir into archive path")
-			return
-		}
-
-		if app.Config.RememberRecent {
-			u := &url.URL{Path: path, Scheme: "file"}
-			ok := app.S.RecentManager.AddItem(u.String())
-			if !ok {
-				log.Printf("Couldn't add %s as a recent item", path)
-			}
-		}
-	}
 }
 
 func (app *App) archiveIsLoaded() bool {

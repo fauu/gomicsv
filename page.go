@@ -78,6 +78,7 @@ func (app *App) doSetPage(n int) {
 	var err error
 	app.S.PixbufL, err = app.S.Archive.Load(n, app.Config.EmbeddedOrientation, app.Config.NPreload)
 	if err != nil {
+		app.showError(err.Error())
 		return
 	}
 
